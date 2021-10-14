@@ -1,7 +1,7 @@
 import math
 
 
-class HeapNode():
+class HeapNode:
     def __init__(self, frequency):
         self._frequency = frequency
 
@@ -45,15 +45,15 @@ def find_freqs(message):
 
 
 def sort_add(heap, value):
-    l = 0
+    low = 0
     r = len(heap)
-    while l < r:
-        m = math.floor((l + r) / 2)
+    while low < r:
+        m = math.floor((low + r) / 2)
         if heap[m].frequency < value.frequency:
-            l = m + 1
+            low = m + 1
         else:
             r = m
-    heap = heap[:l] + [value] + heap[l:]
+    heap = heap[:low] + [value] + heap[low:]
     return heap
 
 
@@ -119,7 +119,7 @@ def encode_complete(message):
     return bin_total
 
 
-## Reconstructor Functions
+# Reconstructor Functions
 def decode(message, chars_root):
     decoded = ''
     node = chars_root
@@ -156,7 +156,7 @@ def reconstruct_table(enc_table):
         i += 32
 
         table[char] = num
-    return (table, i)
+    return table, i
 
 
 def decode_complete(encoded_bits):
@@ -176,15 +176,15 @@ def write_bits_file(filename, bits):
 
 def read_bits_file(filename):
     with open(filename, 'rb') as file:
-        bytes = file.read()
-        bits = bin(int.from_bytes(bytes, 'big'))
+        file_bytes = file.read()
+        bits = bin(int.from_bytes(file_bytes, 'big'))
         return bits[2:]
 
 
 def read_file(filename):
     bits = read_bits_file(filename)
-    bytes = int(bits, 2).to_bytes((len(bits) + 7) // 8, 'big')
-    text = bytes.decode('utf-8')
+    file_bytes = int(bits, 2).to_bytes((len(bits) + 7) // 8, 'big')
+    text = file_bytes.decode('utf-8')
     return text
 
 
@@ -193,8 +193,7 @@ def write_file(filename, write):
         return file.write(write)
 
 
-if __name__ == "__main__":
-
+def main():
     menu_top_lvl = "-Blubywaff's Text Coder-" \
                    "\n1. Read Text File" \
                    "\n2. Write Text File" \
@@ -251,6 +250,9 @@ if __name__ == "__main__":
             text = decode_complete(bits)
             print(text)
 
+
+if __name__ == "__main__":
+    main()
 
     def err_test():
         import time
