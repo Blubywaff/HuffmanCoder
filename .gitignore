@@ -1,2 +1,13 @@
+# Personal Config Folders
 venv/
 .idea/
+
+# Testing Data Formats
+*.txt
+*.b1baff
+*.bmp
+*.jpg
+
+# Junk and Drafting Code
+scratch.py
+temp.py
